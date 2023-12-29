@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DotMatrixReport="True" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45285,6835066088" ReportOptions.Description.Text="" ReportOptions.LastChange="45285,8545151852" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxDMPPage Name="Page1" HGuides.Text="" VGuides.Text="" PaperWidth="210,819863845505" PaperHeight="148,431154138213" PaperSize="256" LeftMargin="2,53999835958439" RightMargin="2,53999835958439" TopMargin="4,49791376176403" BottomMargin="4,49791376176403" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0" FontStyle="0">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="85" Left="0" Top="17" Width="777,6">
+      <TfrxDMPMemoView Name="DMPMemo1" Align="baWidth" AllowVectorExport="True" Left="0" Top="0" Width="777,6" Height="17" Frame.Typ="0" HAlign="haCenter" TruncOutboundText="False" Text="STRUK PENJUALAN"/>
+      <TfrxDMPMemoView Name="DMPMemo2" Align="baWidth" AllowVectorExport="True" Left="0" Top="34" Width="777,6" Height="17" Frame.Typ="0" HAlign="haCenter" TruncOutboundText="False" Text="PT. KELOMPOK 6 "/>
+      <TfrxDMPMemoView Name="DMPMemo3" Align="baWidth" AllowVectorExport="True" Left="0" Top="51" Width="777,6" Height="17" Frame.Typ="0" HAlign="haCenter" TruncOutboundText="False" Text="WELL PLAYED"/>
+      <TfrxDMPMemoView Name="DMPMemo4" Align="baWidth" AllowVectorExport="True" Left="0" Top="68" Width="777,6" Height="17" Frame.Typ="0" HAlign="haCenter" TruncOutboundText="False" Text="022 09912"/>
+    </TfrxReportTitle>
+    <TfrxHeader Name="Header1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="51" Left="0" Top="136" Width="777,6">
+      <TfrxDMPLineView Name="DMPLine1" Align="baWidth" AllowVectorExport="True" Left="4,8" Top="8,5" Width="768" Height="0" Color="0"/>
+      <TfrxDMPLineView Name="DMPLine2" Align="baWidth" AllowVectorExport="True" Left="4,8" Top="8,5" Width="768" Height="0" Color="0"/>
+      <TfrxDMPLineView Name="DMPLine3" Align="baWidth" AllowVectorExport="True" Left="4,8" Top="42,5" Width="768" Height="0" Color="0"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANtanggal_penjualan" IndexTag="1" Align="baLeft" AllowVectorExport="True" Left="0" Top="17" Width="134,4" Height="17" DataField="tanggal_penjualan" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;tanggal_penjualan&#34;]"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANno_faktur_penjualan_1" IndexTag="1" Align="baRight" AllowVectorExport="True" Left="547,2" Top="17" Width="230,4" Height="17" DataField="no_faktur_penjualan_1" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" HAlign="haRight" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;no_faktur_penjualan_1&#34;]"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANnama_1" IndexTag="1" AllowVectorExport="True" Left="374,4" Top="17" Width="144" Height="17" DataField="nama_1" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;nama_1&#34;]"/>
+    </TfrxHeader>
+    <TfrxFooter Name="Footer1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="34" Left="0" Top="255" Width="777,6">
+      <TfrxDMPLineView Name="DMPLine4" AllowVectorExport="True" Left="561,6" Top="8,5" Width="211,2" Height="0" Color="0"/>
+      <TfrxDMPMemoView Name="DMPMemo5" AllowVectorExport="True" Left="662,4" Top="17" Width="172,8" Height="17" DisplayFormat.FormatStr="%2.2n" DisplayFormat.Kind="fkNumeric" Frame.Typ="0" TruncOutboundText="False" Text="[SUM(strtoint(&#60;FR_PENJUALAN.&#34;total_harga&#34;&#62;),masterdata1)]"/>
+      <TfrxDMPMemoView Name="DMPMemo6" AllowVectorExport="True" Left="537,6" Top="17" Width="76,8" Height="17" Frame.Typ="0" TruncOutboundText="False" Text="Total :"/>
+      <TfrxDMPMemoView Name="DMPMemo8" AllowVectorExport="True" Left="614,4" Top="17" Width="28,8" Height="17" Frame.Typ="0" TruncOutboundText="False" Text="Rp."/>
+    </TfrxFooter>
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="34" Left="0" Top="204" Width="777,6" ColumnWidth="0" ColumnGap="0" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" RowCount="0">
+      <TfrxDMPMemoView Name="FR_PENJUALANnama" IndexTag="1" Align="baLeft" AllowVectorExport="True" Left="0" Top="17" Width="124,8" Height="17" DataField="nama" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;nama&#34;]"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANvariant" IndexTag="1" AllowVectorExport="True" Left="278,4" Top="17" Width="124,8" Height="17" DataField="variant" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;variant&#34;]"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANisi" IndexTag="1" Align="baLeft" AllowVectorExport="True" Left="124,8" Top="17" Width="57,6" Height="17" DataField="isi" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;isi&#34;]"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANjumlah" IndexTag="1" AllowVectorExport="True" Left="403,2" Top="17" Width="48" Height="17" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;jumlah&#34;] X"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANharga_barang" IndexTag="1" AllowVectorExport="True" Left="499,2" Top="17" Width="86,4" Height="17" DataField="harga_barang" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" DisplayFormat.FormatStr="%2.2n" DisplayFormat.Kind="fkNumeric" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;harga_barang&#34;]"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANtotal_harga" IndexTag="1" AllowVectorExport="True" Left="662,4" Top="17" Width="134,4" Height="17" DataField="total_harga" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" DisplayFormat.FormatStr="%2.2n" DisplayFormat.Kind="fkNumeric" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;total_harga&#34;]"/>
+      <TfrxDMPMemoView Name="DMPMemo7" AllowVectorExport="True" Left="614,4" Top="17" Width="28,8" Height="17" Frame.Typ="0" TruncOutboundText="False" Text="Rp."/>
+      <TfrxDMPMemoView Name="DMPMemo9" AllowVectorExport="True" Left="460,8" Top="17" Width="28,8" Height="17" Frame.Typ="0" TruncOutboundText="False" Text="Rp."/>
+      <TfrxDMPMemoView Name="DMPMemo10" AllowVectorExport="True" Left="595,2" Top="17" Width="19,2" Height="17" Frame.Typ="0" TruncOutboundText="False" Text=":"/>
+      <TfrxDMPMemoView Name="FR_PENJUALANsatuan" IndexTag="1" AllowVectorExport="True" Left="192" Top="17" Width="86,4" Height="17" DataField="satuan" DataSet="FRDB_DATAPENJUALAN" DataSetName="FR_PENJUALAN" Frame.Typ="0" TruncOutboundText="False" Text="[FR_PENJUALAN.&#34;satuan&#34;]"/>
+    </TfrxMasterData>
+    <TfrxDMPMemoView Name="DMPMemo11" AllowVectorExport="True" Left="0" Top="340" Width="163,2" Height="68" Frame.Typ="0" TruncOutboundText="False" Text=" Kasir,&#13;&#10;&#13;&#10;&#13;&#10;(.............)"/>
+    <TfrxDMPMemoView Name="DMPMemo12" Align="baCenter" AllowVectorExport="True" Left="249,6" Top="442" Width="278,4" Height="51" Frame.Typ="0" TruncOutboundText="False" Text="    -- TERIMA KASIH --&#13;&#10;Sudah Berkunjung Di Toko Kami&#13;&#10;=== ENJOYING YOUR LIFE ==="/>
+    <TfrxDMPLineView Name="DMPLine5" AllowVectorExport="True" Left="4,8" Top="501,5" Width="768" Height="0" Color="0"/>
+    <TfrxDMPLineView Name="DMPLine6" AllowVectorExport="True" Left="4,8" Top="518,5" Width="768" Height="0" Color="0"/>
+  </TfrxDMPPage>
+</TfrxReport>

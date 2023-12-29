@@ -1,0 +1,225 @@
+object Form_data_pembelian: TForm_data_pembelian
+  Left = 0
+  Top = 0
+  Caption = 'Form_data_pembelian'
+  ClientHeight = 394
+  ClientWidth = 1103
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  DesignSize = (
+    1103
+    394)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label56: TLabel
+    Left = 20
+    Top = 15
+    Width = 273
+    Height = 24
+    Caption = 'DATA PEMBELIAN BARANG'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 32
+    Top = 323
+    Width = 187
+    Height = 19
+    Caption = 'Filter No.Faktur Pembelian'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object DBGrid4: TDBGrid
+    Left = 8
+    Top = 45
+    Width = 1087
+    Height = 251
+    Anchors = [akLeft, akTop, akRight]
+    DataSource = DataModule_warung.DataSourceDETAILPEMBELIAN
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'id_detail_pembelian'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID PEMBELIAN'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'no_faktur_pembelian'
+        Title.Alignment = taCenter
+        Title.Caption = 'NO FAKTUR'
+        Width = 103
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tanggal_pembelian'
+        Title.Alignment = taCenter
+        Title.Caption = 'TANGGAL BELI'
+        Width = 128
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'id'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID SUPPLIER'
+        Width = 70
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nama'
+        Title.Alignment = taCenter
+        Title.Caption = 'NAMA SUPPLIER'
+        Width = 83
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'alamat'
+        Title.Alignment = taCenter
+        Title.Caption = 'ALAMAT SUPPLIER'
+        Width = 131
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'no_tlpn'
+        Title.Alignment = taCenter
+        Title.Caption = 'No Tlpn'
+        Width = 83
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'id_barang'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID BARANG'
+        Width = 77
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nama_1'
+        Title.Alignment = taCenter
+        Title.Caption = 'NAMA BARANG'
+        Width = 172
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'brand'
+        Title.Alignment = taCenter
+        Title.Caption = 'BRAND'
+        Width = 114
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'id_detail_barang'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID BARANG'
+        Width = 108
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'isi'
+        Title.Alignment = taCenter
+        Title.Caption = 'ISI'
+        Width = 54
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'satuan'
+        Title.Alignment = taCenter
+        Title.Caption = 'SATUAN'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'variant'
+        Title.Alignment = taCenter
+        Title.Caption = 'VARIANT'
+        Width = 84
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'jumlah_barang'
+        Title.Alignment = taCenter
+        Title.Caption = 'JUMLAH'
+        Width = 108
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'harga_beli'
+        Title.Alignment = taCenter
+        Title.Caption = 'HARGA BELI'
+        Width = 120
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'total_harga'
+        Title.Alignment = taCenter
+        Title.Caption = 'TOTAL'
+        Width = 128
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'status'
+        Title.Alignment = taCenter
+        Title.Caption = 'STATUS'
+        Width = 183
+        Visible = True
+      end>
+  end
+  object ComboBoxfilterfaktur: TComboBox
+    Left = 248
+    Top = 320
+    Width = 185
+    Height = 27
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+  end
+  object btnkembali: TButton
+    Left = 904
+    Top = 318
+    Width = 169
+    Height = 35
+    Caption = 'KEMBALI'
+    TabOrder = 2
+  end
+end

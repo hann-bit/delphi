@@ -1,0 +1,91 @@
+object Form_data_pembelian: TForm_data_pembelian
+  Left = 0
+  Top = 0
+  Caption = 'Form_data_pembelian'
+  ClientHeight = 459
+  ClientWidth = 1042
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label56: TLabel
+    Left = 64
+    Top = 15
+    Width = 152
+    Height = 24
+    Caption = 'PILIH BARANG'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object DBGrid4: TDBGrid
+    Left = 20
+    Top = 45
+    Width = 937
+    Height = 251
+    DataSource = DataModule_warung.DataSourceDETAILbarang
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'id_detail_barang'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID DETAIL BARANG'
+        Width = 109
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nama'
+        Title.Alignment = taCenter
+        Title.Caption = 'NAMA BARANG'
+        Width = 208
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'brand'
+        Title.Alignment = taCenter
+        Title.Caption = 'BRAND'
+        Width = 200
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'isi'
+        Title.Alignment = taCenter
+        Title.Caption = 'ISI'
+        Width = 71
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'satuan'
+        Title.Alignment = taCenter
+        Title.Caption = 'SATUAN'
+        Width = 169
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'variant'
+        Title.Alignment = taCenter
+        Title.Caption = 'VARIANT'
+        Width = 141
+        Visible = True
+      end>
+  end
+end

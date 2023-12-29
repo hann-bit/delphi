@@ -1,0 +1,16 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  MainMenu in 'MainMenu.pas' {MenuUtama},
+  datamodul in 'datamodul.pas' {DataModule_warung: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMenuUtama, MenuUtama);
+  Application.CreateForm(TDataModule_warung, DataModule_warung);
+  Application.Run;
+end.

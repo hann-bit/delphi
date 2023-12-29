@@ -1,0 +1,29 @@
+unit DataPembelian;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls;
+
+type
+  TForm_data_pembelian = class(TForm)
+    Label56: TLabel;
+    DBGrid4: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form_data_pembelian: TForm_data_pembelian;
+
+implementation
+
+{$R *.dfm}
+
+uses MainMenu, datamodul;
+
+end.

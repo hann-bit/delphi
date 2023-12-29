@@ -1,0 +1,534 @@
+unit popupjenisbarang;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TFPopUp = class(TForm)
+    PageControl1: TPageControl;
+    TS_Jenisbarang: TTabSheet;
+    DBGrid3: TDBGrid;
+    Btnhapusjenisbarang: TButton;
+    Btnubahjenisbarang: TButton;
+    Btnsimpanjenisbarang: TButton;
+    Enamajenisbarang: TEdit;
+    Label21: TLabel;
+    Label18: TLabel;
+    TSInputDetailBarang: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    BtnsimpanDETAILbarang: TButton;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Eisi: TEdit;
+    Evariant: TEdit;
+    DateTimePickerexpbarang: TDateTimePicker;
+    ComboBoxsatuan: TComboBox;
+    Shape6: TShape;
+    Shape1: TShape;
+    TSDAFTARDETAILBARANG: TTabSheet;
+    Label56: TLabel;
+    BTNKEMBALI: TButton;
+    BTNPILIHBARANG: TButton;
+    ECARIVARIANT: TEdit;
+    Label41: TLabel;
+    DBGrid4: TDBGrid;
+    TSKonfirmasiBarang: TTabSheet;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    GroupBox1: TGroupBox;
+    Combonofaktur: TComboBox;
+    radiokonfirmasi: TRadioGroup;
+    BTNKONFIRMASI: TButton;
+    Label19: TLabel;
+    BuKEMBALI: TButton;
+    Label20: TLabel;
+    TSDaftarstok: TTabSheet;
+    Label40: TLabel;
+    BTN_PILIHSTOK: TButton;
+    ButtonKEMBALI: TButton;
+    DBGrid6: TDBGrid;
+    procedure BtnsimpanjenisbarangClick(Sender: TObject);
+    procedure BtnubahjenisbarangClick(Sender: TObject);
+    procedure DBGrid3CellClick(Column: TColumn);
+    procedure BtnhapusjenisbarangClick(Sender: TObject);
+    procedure BtnsimpanDETAILbarangClick(Sender: TObject);
+    procedure BtnUbahDetailBarangClick(Sender: TObject);
+    procedure BTNPILIHBARANGClick(Sender: TObject);
+    procedure ECARIVARIANTChange(Sender: TObject);
+    procedure BTNKONFIRMASIClick(Sender: TObject);
+    procedure BTNKEMBALIClick(Sender: TObject);
+    procedure CombonofakturChange(Sender: TObject);
+    procedure BuKEMBALIClick(Sender: TObject);
+    procedure BTN_PILIHSTOKClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FPopUp: TFPopUp;
+
+implementation
+
+{$R *.dfm}
+
+uses datamodul, MainMenu;
+
+procedure TFPopUp.BtnhapusjenisbarangClick(Sender: TObject);
+var
+ id_jenis_barang:string;
+begin
+   id_jenis_barang:=DataModule_warung.ZQueryjenisbarang.FieldByName('id_jenis_barang').AsString;
+   if (Enamajenisbarang.Text='') or (id_jenis_barang='') then
+   MessageDlg('SILAHKAN PILIH DATA YANG MAU KAMU DIHAPUSS !!!',mtWarning,[mbOK],0)
+   else
+   begin
+   if MessageDlg('ANDA YAKIN INGIN HAPUS DATA ??',mtConfirmation,[mbOK,mbCancel],0)=mrOk then
+   begin
+   with DataModule_warung.ZQcommand_sql do
+   begin
+     SQL.Clear;
+     SQL.Add('select * from jenis_barang WHERE id_jenis_barang = "'+id_jenis_barang+'"');
+     Active:=True;
+     Delete;
+
+     MessageDlg('YEAYY....DATA BARANG KAMU BERHASIL DIHAPUS!!! ',mtInformation,[mbOK],0);
+            DataModule_warung.ZQueryjenisbarang.Refresh;
+            DataModule_warung.ZQuerydaftarbarang.Refresh;
+   end;
+   end;
+   end;
+end;
+
+procedure TFPopUp.BTNKEMBALIClick(Sender: TObject);
+begin
+FPopUp.Close;
+end;
+
+procedure TFPopUp.BTNKONFIRMASIClick(Sender: TObject);
+var
+    id_stok, id_barang, brand , isi, variant, id_detail_barang, id_detail_pembelian:string;
+    i, jumlah_barang, total_stok:integer;
+begin
+case radiokonfirmasi.ItemIndex of
+    -1:begin
+      MessageDlg('PILIH DAHULU METODE NYA !! ',mtWarning,[mbOK],0)
+    end;
+    0: begin
+         if Combonofaktur.Text=''  then
+         MessageDlg('PILIH No.Faktur Pembelian !! ',mtWarning,[mbOK],0)
+         else begin
+              DataModule_warung.ZQueryDETAILPEMBELIAN.First;
+    while not DataModule_warung.ZQueryDETAILPEMBELIAN.Eof do
+                begin
+                    id_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_barang').AsString;
+                        brand:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('brand').AsString;
+             id_detail_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_barang').AsString;
+                          isi:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('isi').AsString;
+                      variant:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('variant').AsString;
+
+                      id_stok:=id_detail_barang+'-'+id_barang+'-'+isi+variant;
+
+          if DataModule_warung.ZQuerySTOK.Locate('id_stok', id_stok,[]) then
+    begin
+        id_detail_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_pembelian').AsString;
+        with DataModule_warung.ZQcommand_sql do
+            begin
+                  SQL.Clear;
+                  SQL.Add('SELECT * FROM stok_barang WHERE id_stok="'+id_stok+'" ');
+                  Active:=True;
+
+                  jumlah_barang:=StrToInt(DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('jumlah_barang').AsString);
+
+                  Edit;
+                  FieldByName('jumlah_stok').AsString:=IntToStr(StrToInt(FieldByName('jumlah_stok').AsString)+jumlah_barang);
+                  Post;
+                  DataModule_warung.ZQuerySTOK.Refresh;
+
+                  SQL.Clear;
+                  SQL.Add('SELECT * FROM detail_pembelian WHERE id_detail_pembelian="'+id_detail_barang+'"');
+                  Active:=True;
+                  Edit;
+                  FieldByName('status').AsString:='Konfirmasi';
+                  Post;
+                  DataModule_warung.ZQuerydaftarbarang.Refresh;
+                  DataModule_warung.ZQuerySTOK.Refresh;
+            end;
+            end else
+            begin
+            id_detail_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_pembelian').AsString;
+            with DataModule_warung.ZQcommand_sql do
+                begin
+                    SQL.Clear;
+                    SQL.Add('SELECT * FROM stok_barang');
+                    Active:=True;
+                    Append;
+                    FieldByName('id_stok').AsString:=id_stok;
+                    FieldByName('id_detail_barang').AsString:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_barang').AsString;
+                    FieldByName('harga').AsString:='0';
+                    FieldByName('jumlah_stok').AsString:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('jumlah_barang').AsString;
+                    Post;
+                    DataModule_warung.ZQuerydaftarbarang.Refresh;
+                    DataModule_warung.ZQuerySTOK.Refresh;
+
+                    SQL.Clear;
+                    SQL.Add('SELECT * FROM detail_pembelian WHERE id_detail_pembelian="'+id_detail_barang +'"');
+                    Active:=True;
+                    Edit;
+                    FieldByName('status').AsString:='Konfirmasi';
+                    Post;
+                end;
+            end;
+
+            DataModule_warung.ZQueryDETAILPEMBELIAN.Next;
+            DataModule_warung.ZQueryDETAILPEMBELIAN.Refresh;
+            DataModule_warung.ZQuerydaftarbarang.Refresh;
+            DataModule_warung.ZQuerySTOK.Refresh;
+          end;
+          MessageDlg(' STOK BERHASIL DITAMBAHKAN !',mtInformation,[mbOK],0);
+        end;
+     end;
+
+   1:begin
+                    id_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_barang').AsString;
+                        brand:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('brand').AsString;
+             id_detail_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_barang').AsString;
+                          isi:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('isi').AsString;
+                      variant:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('variant').AsString;
+
+                      id_stok:=id_detail_barang+'-'+id_barang+'-'+isi+variant;
+
+              if DataModule_warung.ZQuerySTOK.Locate('id_stok', id_stok, []) then
+              begin
+                  id_detail_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_pembelian').AsString;
+                      with DataModule_warung.ZQcommand_sql do
+                         begin
+                            SQL.Clear;
+                            SQL.Add('SELECT * FROM stok_barang WHERE id_stok="'+id_stok+'" ');
+                            Active:=True;
+
+                            jumlah_barang:=StrToInt(DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('jumlah_barang').AsString);
+
+                             Edit;
+                             FieldByName('jumlah_stok').AsString:=IntToStr(StrToInt(FieldByName('jumlah_stok').AsString)+jumlah_barang);
+                             Post;
+                             DataModule_warung.ZQuerySTOK.Refresh;
+
+                              SQL.Clear;
+                              SQL.Add('SELECT * FROM detail_pembelian WHERE id_detail_pembelian="'+id_detail_barang+'"');
+                              Active:=True;
+
+                              Edit;
+                              FieldByName('status').AsString:='Konfirmasi';
+                              Post;
+                         end;
+                    end else
+                        begin
+                          id_detail_barang:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_pembelian').AsString;
+                               with DataModule_warung.ZQcommand_sql do
+                                  begin
+                                         SQL.Clear;
+                                         SQL.Add('SELECT * FROM stok_barang');
+                                         Active:=True;
+
+                                         Append;
+                                         FieldByName('id_stok').AsString:=id_stok;
+                                         FieldByName('id_detail_barang').AsString:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('id_detail_barang').AsString;
+                                         FieldByName('harga').AsString:='0';
+                                         FieldByName('jumlah_stok').AsString:=DataModule_warung.ZQueryDETAILPEMBELIAN.FieldByName('jumlah_barang').AsString;
+                                         Post;
+                                         DataModule_warung.ZQuerySTOK.Refresh;
+
+                                         SQL.Clear;
+                                         SQL.Add('SELECT * FROM detail_pembelian WHERE id_detail_pembelian="'+id_detail_barang +'"');
+                                         Active:=True;
+
+                                         Edit;
+                                         FieldByName('status').AsString:='Konfirmasi';
+                                         Post;
+                                 end;
+              end;
+            DataModule_warung.ZQueryDETAILPEMBELIAN.Refresh;
+            DataModule_warung.ZQuerydaftarbarang.Refresh;
+            DataModule_warung.ZQuerySTOK.Refresh;
+             MessageDlg(' STOK BERHASIL DITAMBAHKAN !',mtInformation,[mbOK],0);
+   end;
+end;
+end;
+
+
+
+
+
+
+
+procedure TFPopUp.BTNPILIHBARANGClick(Sender: TObject);
+begin
+with DataModule_warung.ZQueryDETAILbarang do
+begin
+    MenuUtama.LIDBARANG.Caption:=FieldByName('id_barang').AsString;
+     MenuUtama.LNAMABARANG.Caption:=FieldByName('nama').AsString;
+      MenuUtama.LJENISBARANG.Caption:=FieldByName('jenis_barang').AsString;
+       MenuUtama.LBRAND.Caption:=FieldByName('brand').AsString;
+        MenuUtama.L_ISI.Caption:=FieldByName('isi').AsString;
+         MenuUtama.LSATUAN.Caption:=FieldByName('satuan').AsString;
+          MenuUtama.LVARIANT.Caption:=FieldByName('variant').AsString;
+end;
+   FPopUp.Close;
+end;
+
+procedure TFPopUp.BtnsimpanDETAILbarangClick(Sender: TObject);
+begin
+if Label13.Caption='.............' then
+    MessageDlg('ID BARANG HARUS DIISI !!!',mtWarning,[mbOK],0)
+    else
+if Eisi.Text = '' then
+     MessageDlg('ISI HARUS DIISI !!!',mtWarning,[mbOK],0)
+     else
+if ComboBoxsatuan.Text = '' then
+     MessageDlg('SATUAN HARUS DIISI !!!',mtWarning,[mbOK],0)
+     else
+if Evariant.Text = '' then
+     MessageDlg('VARIANT HARUS DIISI !!!',mtWarning,[mbOK],0)
+     else
+     begin
+       with DataModule_warung.ZQcommand_sql do
+       begin
+            SQL.Clear;
+            SQL.Add('select * from detail_barang');
+            Active:=True;
+
+            Append;
+            FieldByName('id_barang').AsString:=Label13.Caption;
+            FieldByName('isi').AsString:=Eisi.Text;
+            FieldByName('satuan').AsString:=ComboBoxsatuan.Text;
+            FieldByName('variant').AsString:=Evariant.Text;
+            FieldByName('exp_barang').AsDateTime:=DateTimePickerexpbarang.Date;
+
+            Post;
+
+            MessageDlg('YEAYY....DATA DETAIL BARANG KAMU BERHASIL DISIMPAN!!! ',mtWarning,[mbOK],0);
+            DataModule_warung.ZQueryDETAILbarang.Refresh;
+            FPopUp.Close;
+       end;
+     end;
+end;
+
+procedure TFPopUp.BtnsimpanjenisbarangClick(Sender: TObject);
+begin
+
+   if Enamajenisbarang.Text = '' then
+     MessageDlg('NAMA JENIS BARANG HARUS DIISI !!!',mtWarning,[mbOK],0)
+   else
+     begin
+       with DataModule_warung.ZQcommand_sql do
+       begin
+            SQL.Clear;
+            SQL.Add('select * from jenis_barang');
+            Active:=True;
+
+            Append;
+            FieldByName('jenis_barang').AsString:=Enamajenisbarang.Text;
+            Post;
+
+            MessageDlg('YEAYY....DATA JENIS BARANG KAMU BERHASIL DISIMPAN!!! ',mtWarning,[mbOK],0);
+            DataModule_warung.ZQueryjenisbarang.Refresh;
+            DataModule_warung.ZQuerydaftarbarang.Refresh;
+       end;
+     end;
+end;
+
+
+
+
+procedure TFPopUp.BtnUbahDetailBarangClick(Sender: TObject);
+var
+ id_detail_barang:string;
+begin
+
+   id_detail_barang:=DataModule_warung.ZQueryDETAILbarang.FieldByName('id_detail_barang').AsString;
+   if id_detail_barang='' then
+   MessageDlg('SILAHKAN PILIH DATA DETAIL BARANG TERLEBIH DAHULU UNTUK DIUBAH!!!',mtWarning,[mbOK],0)
+   else
+   begin
+   with DataModule_warung.ZQcommand_sql do
+   begin
+     SQL.Clear;
+     SQL.Add('select * from detail_barang WHERE id_detail_barang = "'+id_detail_barang+'"');
+     Active:=True;
+
+     Edit;
+     FieldByName('isi').AsString:=Eisi.Text;
+     FieldByName('satuan').AsString:=ComboBoxsatuan.Text;
+     FieldByName('variant').AsString:=Evariant.Text;
+     FieldByName('exp_barang').AsDateTime:=DateTimePickerexpbarang.Date;
+
+     Post;
+
+      MessageDlg('YEAYY....DATA ID DETAIL BARANG KAMU BERHASIL DIUBAH!!! ',mtInformation,[mbOK],0);
+            DataModule_warung.ZQueryDETAILbarang.Refresh;
+            FPopUp.Close;
+   end;
+   end;
+
+
+end;
+
+procedure TFPopUp.BtnubahjenisbarangClick(Sender: TObject);
+var
+ id_jenis_barang:string;
+begin
+   id_jenis_barang:=DataModule_warung.ZQueryjenisbarang.FieldByName('id_jenis_barang').AsString;
+   if (Enamajenisbarang.Text='') or (id_jenis_barang='') then
+   MessageDlg('SILAHKAN PILIH DATA JENIS BARANG TERLEBIH DAHULU UNTUK DIUBAH!!!',mtWarning,[mbOK],0)
+   else
+   begin
+   with DataModule_warung.ZQcommand_sql do
+   begin
+     SQL.Clear;
+     SQL.Add('select * from jenis_barang WHERE id_jenis_barang = "'+id_jenis_barang+'"');
+     Active:=True;
+
+     Edit;
+     FieldByName('jenis_barang').AsString:=Enamajenisbarang.Text;
+     Post;
+
+      MessageDlg('YEAYY....DATA KAMU BERHASIL DIUBAH!!! ',mtInformation,[mbOK],0);
+            DataModule_warung.ZQueryjenisbarang.Refresh;
+            DataModule_warung.ZQuerydaftarbarang.Refresh;
+   end;
+   end;
+
+
+end;
+
+procedure TFPopUp.BTN_PILIHSTOKClick(Sender: TObject);
+var
+    id_stok:string;
+    jumlah_stok:integer;
+begin
+id_stok:=DataModule_warung.ZQuerySTOK.FieldByName('id_stok').AsString;
+
+with DataModule_warung.ZQcommand_sql do
+  begin
+    SQL.Clear;
+    SQL.Add('SELECT * FROM stok_barang WHERE id_stok = "'+id_stok+'" ');
+    Active:=True;
+ end;
+
+ jumlah_stok:=DataModule_warung.ZQcommand_sql.FieldByName('jumlah_stok').AsInteger;
+
+ if jumlah_stok <=0 then
+   MessageDlg(' STOK SEDANG KOSONG ',mtInformation,[mbOK],0)
+  else
+   begin
+ with DataModule_warung.ZQuerySTOK do
+   begin
+     MenuUtama.L_IDBARANG_FP.Caption:=FieldByName('id_barang').AsString;
+     MenuUtama.L_NAMABARANG_FP.Caption:=FieldByName('nama').AsString;
+     MenuUtama.L_JENISBARANG_FP.Caption:=FieldByName('jenis_barang').AsString;
+     MenuUtama.L_BRAND_FP.Caption:=FieldByName('brand').AsString;
+     MenuUtama.L_ISI_FP.Caption:=FieldByName('isi').AsString;
+     MenuUtama.L_SATUAN_FP.Caption:=FieldByName('satuan').AsString;
+     MenuUtama.L_VARIANT_FP.Caption:=FieldByName('variant').AsString;
+     MenuUtama.L_HARGAJUAL_FP.Caption:=FieldByName('harga').AsString;
+   end;
+   FPopUp.Close;
+   end;
+end;
+
+procedure TFPopUp.BuKEMBALIClick(Sender: TObject);
+begin
+FPopUp.Close;
+end;
+
+procedure TFPopUp.CombonofakturChange(Sender: TObject);
+begin
+with DataModule_warung.ZQueryPEMBELIAN do
+        begin
+            SQL.Clear;
+            SQL.Add('SELECT`pembelian`.*,`supplier`.* '
+                    +'FROM '
+                    +'`db_warung`.`supplier` '
+                    +'INNER JOIN `db_warung`.`pembelian` '
+                    +'ON (`supplier`.`id` = `pembelian`.`id_supplier`)'
+                    +'WHERE pembelian.no_faktur_pembelian LIKE "'+Combonofaktur.Text+'%" ');
+            Active:=True;
+        end;
+       with DataModule_warung.ZQueryDETAILPEMBELIAN do
+       begin
+            SQL.Clear;
+            SQL.Add('SELECT `detail_pembelian`.*,`pembelian`.*, `detail_barang`.*, `daftar_barang`.*,`supplier`.*  '
+                    +'FROM '
+                    +'`db_warung`.`pembelian` '
+                    +'INNER JOIN `db_warung`.`detail_pembelian` '
+                    +'ON (`pembelian`.`no_faktur_pembelian` = `detail_pembelian`.`no_faktur_pembelian`) '
+                    +'INNER JOIN `db_warung`.`supplier` '
+                    +'ON (`pembelian`.`id_supplier` = `supplier`.`id`) '
+                    +'INNER JOIN `db_warung`.`detail_barang` '
+                    +' ON (`detail_barang`.`id_detail_barang` = `detail_pembelian`.`id_detail_barang`) '
+                    +'INNER JOIN `db_warung`.`daftar_barang` '
+                    +'ON (`daftar_barang`.`id_barang` = `detail_barang`.`id_barang`) '
+
+                    +'WHERE detail_pembelian.no_faktur_pembelian LIKE "'+Combonofaktur.Text+'%" '
+                    +'AND detail_pembelian.status = "Belum Konfirmasi"');
+                    Active:=True;
+       end;
+
+end;
+
+procedure TFPopUp.DBGrid3CellClick(Column: TColumn);
+begin
+Enamajenisbarang.Text:=DataModule_warung.ZQueryjenisbarang.FieldByName('jenis_barang').AsString;
+end;
+
+
+procedure TFPopUp.ECARIVARIANTChange(Sender: TObject);
+var
+id_barang:string;
+begin
+id_barang:=DataModule_warung.ZQuerydaftarbarang.FieldByName('id_barang').AsString;
+with DataModule_warung.ZQueryDETAILbarang do
+begin
+  SQL.Text:='SELECT `detail_barang`.*, `daftar_barang`.*,`jenis_barang`.* '
+            +'FROM `db_warung`.`daftar_barang` '
+            +'INNER JOIN `db_warung`.`detail_barang` '
+            +'ON (`daftar_barang`.`id_barang` = `detail_barang`.`id_barang`) '
+            +'INNER JOIN `db_warung`.`jenis_barang` '
+            +' ON (`jenis_barang`.`id_jenis_barang` = `daftar_barang`.`id_jenis_barang`)'
+            +' WHERE daftar_barang.id_barang LIKE "%'+id_barang+'%" '
+            +' AND detail_barang.variant LIKE "%'+ECARIVARIANT.Text+'%" ' ;
+      active:=True;
+end;
+end;
+procedure TFPopUp.FormShow(Sender: TObject);
+begin
+TS_Jenisbarang.TabVisible:=false;
+TSInputDetailBarang.TabVisible:=false;
+TSDAFTARDETAILBARANG.TabVisible:=false;
+TSKonfirmasiBarang.TabVisible:=false;
+TSDaftarstok.TabVisible:=false;
+end;
+
+end.
+
